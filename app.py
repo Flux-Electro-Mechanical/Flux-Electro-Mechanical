@@ -174,7 +174,7 @@ def create_app() -> Flask:
     def thank_you():
         return render_template("thank_you.html")
 
-   @app.route("/members")
+@app.route("/members")
 @client_login_required
 def members():
     conn = get_db()
