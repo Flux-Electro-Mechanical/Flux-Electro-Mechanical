@@ -1998,3 +1998,4 @@ If you did not request this, you can ignore this email.
 if __name__ == "__main__":
     app = create_app()
     app.run(debug=True)
+app = create_app()
