@@ -174,41 +174,46 @@ def create_app() -> Flask:
     def thank_you():
         return render_template("thank_you.html")
 
-    @app.route("/members")
-    @client_login_required
-    def members():
-        conn = get_db()
-        resources = conn.execute(
+   @app.route("/members")
+@client_login_required
+def members():
+    conn = get_db()
+
+    if USE_POSTGRES:
+        my_quotes = conn.execute(
             """
-            SELECT id, title, description, file_name, category, created_at
-            FROM member_resources
-            WHERE is_active = 1
+            SELECT *
+            FROM inquiries
+            WHERE client_id = %s
             ORDER BY created_at DESC
+            """,
+            (session["client_id"],),
+        ).fetchall()
+    else:
+        my_quotes = conn.execute(
             """
+            SELECT *
+            FROM inquiries
+            WHERE client_id = ?
+            ORDER BY created_at DESC
+            """,
+            (session["client_id"],),
         ).fetchall()
 
-       if USE_POSTGRES:
-    my_quotes = conn.execute(
+    resources = conn.execute(
         """
         SELECT *
-        FROM inquiries
-        WHERE client_id = %s
+        FROM member_resources
+        WHERE is_active = 1
         ORDER BY created_at DESC
-        """,
-        (session["client_id"],),
-    ).fetchall()
-else:
-    my_quotes = conn.execute(
         """
-        SELECT *
-        FROM inquiries
-        WHERE client_id = ?
-        ORDER BY created_at DESC
-        """,
-        (session["client_id"],),
     ).fetchall()
 
-        return render_template("members.html", resources=resources, my_quotes=my_quotes)
+    return render_template(
+        "members.html",
+        my_quotes=my_quotes,
+        resources=resources,
+    )
 
     @app.route("/members/profile", methods=["GET", "POST"])
     @client_login_required
