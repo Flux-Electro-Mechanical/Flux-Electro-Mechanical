@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="120" viewBox="0 0 420 120" role="img" aria-labelledby="title desc">
+  <title id="title">Flux Electro Mechanical Engineering Works Logo</title>
+  <desc id="desc">Blue and gold industrial logo with FX monogram and company name.</desc>
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f2a227"/>
+      <stop offset="100%" stop-color="#ffc768"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a2e57"/>
+      <stop offset="100%" stop-color="#11457f"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="12" rx="22" ry="22" width="96" height="96" fill="url(#g2)"/>
+  <path d="M34 37h38v12H47v13h22v12H47v25H34V37z" fill="url(#g1)"/>
+  <path d="M74 37h15L75 57l16 42H76L67 75l-8 24H44l16-42-13-20h15l6 10 6-10z" fill="#ffffff"/>
+  <text x="124" y="49" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="800" fill="#0a2e57">Flux Electro Mechanical</text>
+  <text x="124" y="78" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#11457f">Engineering Works</text>
+  <text x="124" y="101" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#f2a227" letter-spacing="1.2">POWER • HVAC • MECHANICAL • MAINTENANCE</text>
+</svg>

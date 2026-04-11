@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1>Admin Dashboard</h1>
+    <div class="cards">
+      <div class="card stat-card"><h3>Total</h3><div class="stat">{{ stats.total }}</div></div>
+      <div class="card stat-card"><h3>New</h3><div class="stat">{{ stats.new }}</div></div>
+      <div class="card stat-card"><h3>Reviewed</h3><div class="stat">{{ stats.reviewed }}</div></div>
+      <div class="card stat-card"><h3>Contacted</h3><div class="stat">{{ stats.contacted }}</div></div>
+      <div class="card stat-card"><h3>Closed</h3><div class="stat">{{ stats.closed }}</div></div>
+      <div class="card stat-card"><h3>Members</h3><div class="stat">{{ stats.members }}</div></div>
+      <div class="card stat-card"><h3>Resources</h3><div class="stat">{{ stats.resources }}</div></div>
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
+        <a class="btn btn-primary" href="{{ url_for('admin_members') }}">Members Admin</a>
+        <a class="btn btn-outline-dark" href="{{ url_for('admin_create_member') }}">Create Member</a>
+        <a class="btn btn-outline-dark" href="{{ url_for('admin_create_member_resource') }}">Upload Member File</a>
+        <a class="btn btn-outline-dark" href="{{ url_for('admin_projects') }}">Projects Admin</a>
+        <a class="btn btn-outline-dark" href="{{ url_for('admin_staff') }}">Staff Admin</a>
+        <a class="btn btn-outline-dark" href="{{ url_for('admin_testimonials') }}">Testimonials</a>
+      </div>
+      <h3>Recent Inquiries</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Company</th>
+              <th>Service</th>
+              <th>Status</th>
+              <th>Created</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for inquiry in recent %}
+            <tr>
+              <td><a href="{{ url_for('admin_inquiry_detail', inquiry_id=inquiry['id']) }}">{{ inquiry['id'] }}</a></td>
+              <td>{{ inquiry['full_name'] }}</td>
+              <td>{{ inquiry['company_name'] or '-' }}</td>
+              <td>{{ inquiry['service_required'] }}</td>
+              <td>{{ inquiry['status'] }}</td>
+              <td>{{ inquiry['created_at'] }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="6">No inquiries yet.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

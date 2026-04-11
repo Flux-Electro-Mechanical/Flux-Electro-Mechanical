@@ -1,0 +1,28 @@
+Flux Electro Mechanical - PostgreSQL Migration Guide
+
+This version supports PostgreSQL.
+
+1. Local SQLite mode
+- Leave DATABASE_URL unset
+- Run: python app.py
+
+2. PostgreSQL mode
+- Set DATABASE_URL to your PostgreSQL connection string
+- Example:
+  DATABASE_URL=postgresql://username:password@host:5432/dbname
+
+3. Render
+- render.yaml already includes a managed PostgreSQL database
+- After deploy, Render injects DATABASE_URL automatically
+
+4. Railway or VPS
+- Create a PostgreSQL database
+- Set DATABASE_URL in environment variables
+
+Notes
+- The app creates tables automatically on startup
+- For serious production, PostgreSQL is recommended
+- Existing SQLite content is not auto-imported
+
+If you want the next step after this, it should be a real data migration tool:
+SQLite -> PostgreSQL
