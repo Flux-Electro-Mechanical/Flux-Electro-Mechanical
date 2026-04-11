@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Contact | Flux Electro Mechanical{% endblock %}
+{% block content %}
+
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>Contact and Quote Request</h1>
+      <p>A stronger contact page with quote form layout, direct information, and office/location placeholders.</p>
+    </div>
+  </section>
+
+
+<section class="section">
+  <div class="container contact-wrap">
+    <div class="card reveal">
+      <h2>Request a Quote</h2>
+      <p class="lead">Registered members can submit quote requests here with project files, drawings, BOQs, photos, and specifications.</p>
+      
+{% if current_client or current_admin %}
+      {% if current_client %}<form class="form" action="{{ url_for('submit_quote') }}" method="POST" enctype="multipart/form-data">{% else %}<form class="form" action="{{ url_for('client_login') }}" method="GET">{% endif %}
+        <div class="form-row">
+          <input type="text" name="full_name" placeholder="Full Name" value="{{ current_client['full_name'] if current_client else '' }}" required />
+          <input type="text" name="company_name" placeholder="Company Name" value="{{ current_client['company_name'] if current_client and current_client['company_name'] else '' }}" />
+        </div>
+        <div class="form-row">
+          <input type="tel" name="phone_number" placeholder="Phone Number" value="{{ current_client['phone_number'] if current_client and current_client['phone_number'] else '' }}" required />
+          <input type="email" name="email_address" placeholder="Email Address" value="{{ current_client['email'] if current_client else company_email }}" required />
+        </div>
+        <div class="form-row">
+          <select name="service_required" required>
+            <option value="">Select Service</option>
+            <option>Electrical Works</option>
+            <option>Mechanical Works</option>
+            <option>HVAC Services</option>
+            <option>Maintenance Services</option>
+            <option>Project Execution</option>
+          </select>
+          <input type="text" name="project_location" placeholder="Project Location" />
+        </div>
+        <div>
+          <label for="project_file" style="display:block;font-weight:800;color:var(--primary);margin:0 0 8px;">Attach project file</label>
+          <input type="file" id="project_file" name="project_file" accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg,.zip,.dwg" />
+          <p class="small" style="margin-top:8px;">You can attach drawings, BOQ files, specifications, photos, or other quote-related documents.</p>
+        </div>
+        <textarea name="message" placeholder="Tell us about your project requirements" required></textarea>
+        {% if current_client %}<button class="btn btn-primary" type="submit">Submit Inquiry</button>{% else %}<button class="btn btn-primary" type="submit">Login to Continue</button>{% endif %}
+      </form>
+      {% else %}
+      <div class="notice">
+        Request a Quote is available for registered members only. Please log in or create a member account before submitting your project details.
+      </div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;">
+        <a class="btn btn-primary" href="{{ url_for('client_login') }}">Member Login</a>
+        <a class="btn btn-outline-dark" href="{{ url_for('client_register') }}">Create Account</a>
+      </div>
+      {% endif %}
+
+      <div class="notice">Contact details, WhatsApp, address, logo, file upload field, and form connection have been updated. Test the form after publishing to confirm email delivery and attachment handling.</div>
+    </div>
+
+    <div class="reveal" style="display:grid;gap:22px;">
+      <div class="card">
+        <h3>Direct Contact Details</h3>
+        <p><strong>Phone:</strong> {{ company_phone }}</p>
+        <p><strong>Email:</strong> {{ company_email }}</p>
+        <p><strong>Office:</strong> {{ company_address }}</p>
+        <p><strong>Working Hours:</strong> Monday - Saturday, 8:00 AM - 6:00 PM</p>
+        <div style="margin-top:18px;">
+          <a class="btn btn-primary" href="{{ company_whatsapp_url }}">Chat on WhatsApp</a>
+        </div>
+      </div>
+      <div class="map-frame"></div>
+    </div>
+  </div>
+</section>
+
+
+  
+
+  
+  
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title }} | FLUX{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <h1>{{ page_title }}</h1>
+    <p>Add a client testimonial to display on the public website.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container" style="max-width:860px;">
+    <div class="card">
+      <form class="form" method="POST" action="{{ form_action }}">
+        <div class="form-row">
+          <input type="text" name="client_name" placeholder="Client Name" value="{{ item['client_name'] if item else '' }}" required />
+          <input type="text" name="company_name" placeholder="Company Name" value="{{ item['company_name'] if item else '' }}" />
+        </div>
+        <div class="form-row">
+          <input type="text" name="role_title" placeholder="Role Title" value="{{ item['role_title'] if item else '' }}" />
+          <input type="number" min="1" max="5" name="rating" placeholder="Rating (1-5)" value="{{ item['rating'] if item else 5 }}" />
+        </div>
+        <input type="text" name="photo_url" placeholder="Photo URL (optional)" value="{{ item['photo_url'] if item else '' }}" />
+        <textarea name="testimonial_text" placeholder="Client Testimonial" required>{{ item['testimonial_text'] if item else '' }}</textarea>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;">
+          <label style="display:flex;align-items:center;gap:10px;">
+            <input type="checkbox" name="is_featured" value="1" {% if item and item['is_featured'] %}checked{% elif not item %}checked{% endif %} />
+            Feature on homepage
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;">
+            <input type="checkbox" name="is_active" value="1" {% if item and item['is_active'] %}checked{% elif not item %}checked{% endif %} />
+            Active
+          </label>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <button class="btn btn-primary" type="submit">Save Testimonial</button>
+          <a class="btn btn-outline-dark" href="{{ url_for('admin_testimonials') }}">Back</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

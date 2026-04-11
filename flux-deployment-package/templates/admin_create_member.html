@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Create Member | Flux Electro Mechanical{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <h1>Create Member</h1>
+    <p>Create a new member account from the admin area.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container" style="max-width:760px;">
+    <div class="card">
+      <form class="form" method="POST">
+        <div class="form-row">
+          <input type="text" name="full_name" placeholder="Full Name" required />
+          <input type="text" name="company_name" placeholder="Company Name" />
+        </div>
+        <div class="form-row">
+          <input type="tel" name="phone_number" placeholder="Phone Number" />
+          <input type="email" name="email" placeholder="Email Address" required />
+        </div>
+        <input type="password" name="password" placeholder="Temporary Password" required />
+        <button class="btn btn-primary" type="submit">Create Member</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

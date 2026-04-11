@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Thank You | Flux Electro Mechanical{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <h1>Thank You</h1>
+    <p>Your quote request has been submitted successfully. Our team will contact you soon.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="card" style="max-width:760px;margin:auto;text-align:center;">
+      <h2>Submission Received</h2>
+      <p>We have received your inquiry. For faster communication, you can also contact us on WhatsApp.</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:20px;">
+        <a class="btn btn-primary" href="{{ company_whatsapp_url }}">Chat on WhatsApp</a>
+        <a class="btn btn-outline-dark" href="{{ url_for('index') }}">Back to Home</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

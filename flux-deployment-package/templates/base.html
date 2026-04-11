@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}FLUX | Luxury Electro Mechanical{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}" />
+</head>
+<body>
+  <div class="topbar">
+    <div class="container">
+      <div>Phone: {{ company_phone }} | Email: {{ company_email }}</div>
+      <div>{{ company_address }} | Mon-Sat | 8:00 AM - 6:00 PM</div>
+    </div>
+  </div>
+
+  <header class="navbar">
+    <div class="container">
+      <a class="brand" href="{{ url_for('index') }}">
+        <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="FLUX Electro Mechanical Engineering Works" class="site-logo luxury-logo" />
+      </a>
+      <div class="nav-wrap">
+        <nav class="nav-links">
+          <a href="{{ url_for('index') }}">Home</a>
+          <a href="{{ url_for('about') }}">About</a>
+          <a href="{{ url_for('services') }}">Services</a>
+          <a href="{{ url_for('projects') }}">Projects</a>
+          <a href="{{ url_for('contact') }}">Contact</a>
+          {% if current_admin %}
+            <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('admin_inquiries') }}">Inquiries</a>
+            <a href="{{ url_for('admin_members') }}">Members Admin</a>
+        <a href="{{ url_for('admin_projects') }}">Projects Admin</a>
+            <a href="{{ url_for('admin_staff') }}">Staff Admin</a>
+        <a href="{{ url_for('admin_testimonials') }}">Testimonials</a>
+            <a href="{{ url_for('admin_testimonials') }}">Testimonials</a>
+            <a href="{{ url_for('admin_projects') }}">Projects Admin</a>
+            <a href="{{ url_for('admin_logout') }}">Logout</a>
+          {% elif current_client %}
+            <a href="{{ url_for('members') }}">Members</a>
+            <a href="{{ url_for('client_profile') }}">Profile</a>
+            <a href="{{ url_for('client_logout') }}">Logout</a>
+          {% else %}
+            <a href="{{ url_for('client_login') }}">Login</a>
+          {% endif %}
+        </nav>
+        <a class="btn btn-outline-dark" href="{{ url_for('contact') }}">Get a Quote</a>
+        <button class="menu-toggle" data-menu-toggle>☰</button>
+      </div>
+    </div>
+    <div class="mobile-menu" data-mobile-menu>
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('about') }}">About</a>
+      <a href="{{ url_for('services') }}">Services</a>
+      <a href="{{ url_for('projects') }}">Projects</a>
+      <a href="{{ url_for('contact') }}">Contact</a>
+      {% if current_admin %}
+        <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('admin_inquiries') }}">Inquiries</a>
+        <a href="{{ url_for('admin_members') }}">Members Admin</a>
+            <a href="{{ url_for('admin_projects') }}">Projects Admin</a>
+        <a href="{{ url_for('admin_staff') }}">Staff Admin</a>
+        <a href="{{ url_for('admin_logout') }}">Logout</a>
+      {% elif current_client %}
+        <a href="{{ url_for('members') }}">Members</a>
+        <a href="{{ url_for('client_profile') }}">Profile</a>
+        <a href="{{ url_for('client_logout') }}">Logout</a>
+      {% else %}
+        <a href="{{ url_for('client_login') }}">Login</a>
+      {% endif %}
+    </div>
+  </header>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <section class="section-sm">
+        <div class="container">
+          {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>Flux Electro Mechanical Engineering Works</h3>
+          <p>Premium electro-mechanical engineering services with a black-and-gold luxury brand identity for industrial, commercial, and residential projects.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <p><a href="{{ url_for('index') }}">Home</a></p>
+          <p><a href="{{ url_for('about') }}">About</a></p>
+          <p><a href="{{ url_for('services') }}">Services</a></p>
+          <p><a href="{{ url_for('projects') }}">Projects</a></p>
+          <p><a href="{{ url_for('contact') }}">Contact</a></p>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <p>Phone: {{ company_phone }}</p>
+          <p>Email: {{ company_email }}</p>
+          <p>Address: {{ company_address }}</p>
+        </div>
+      </div>
+      <div class="footer-bottom">© 2026 Flux Electro Mechanical Engineering Works. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <a class="whatsapp-float" href="{{ company_whatsapp_url }}" aria-label="WhatsApp">WA</a>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

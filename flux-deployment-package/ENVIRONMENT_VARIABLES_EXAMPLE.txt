@@ -1,0 +1,12 @@
+FLASK_SECRET_KEY=replace-with-a-long-random-secret
+FLUX_ADMIN_EMAIL=solutions@fluxelectromechanical.enginner.et
+FLUX_ADMIN_PASSWORD=replace-with-a-strong-password
+PUBLIC_BASE_URL=https://yourdomain.com
+
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USERNAME=your-email@example.com
+SMTP_PASSWORD=your-app-password
+SMTP_USE_TLS=true
+MAIL_FROM=solutions@fluxelectromechanical.enginner.et
+MAIL_TO=solutions@fluxelectromechanical.enginner.et
