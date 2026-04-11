@@ -187,15 +187,26 @@ def create_app() -> Flask:
             """
         ).fetchall()
 
-        my_quotes = conn.execute(
-            """
-            SELECT id, service_required, project_location, status, created_at
-            FROM inquiries
-            WHERE lower(email_address) = lower(?)
-            ORDER BY created_at DESC
-            """,
-            (g.client_user["email"],),
-        ).fetchall()
+       if USE_POSTGRES:
+    my_quotes = conn.execute(
+        """
+        SELECT *
+        FROM inquiries
+        WHERE client_id = %s
+        ORDER BY created_at DESC
+        """,
+        (session["client_id"],),
+    ).fetchall()
+else:
+    my_quotes = conn.execute(
+        """
+        SELECT *
+        FROM inquiries
+        WHERE client_id = ?
+        ORDER BY created_at DESC
+        """,
+        (session["client_id"],),
+    ).fetchall()
 
         return render_template("members.html", resources=resources, my_quotes=my_quotes)
 
