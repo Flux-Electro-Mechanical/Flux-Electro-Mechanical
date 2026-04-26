@@ -187,7 +187,7 @@ def create_app() -> Flask:
                 WHERE client_id = %s
                 ORDER BY created_at DESC
                 """,
-                (session["client_id"],),
+                (session["client_user_id"],),
             ).fetchall()
         else:
             my_quotes = conn.execute(
@@ -197,7 +197,7 @@ def create_app() -> Flask:
                 WHERE client_id = ?
                 ORDER BY created_at DESC
                 """,
-                (session["client_id"],),
+                (session["client_user_id"],),
             ).fetchall()
 
         return render_template("members.html", my_quotes=my_quotes)
